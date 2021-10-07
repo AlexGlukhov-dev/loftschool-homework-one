@@ -4,28 +4,36 @@ const fs = require('fs');
 const { deepStrictEqual } = require('assert');
 
 
-//const readdir = util.promisify(fs.readdir); //читаем содержимое папки . переделали api на промис
 
-fs.readdir(process.argv[2], (err, data) =>{
+const exampleFolder = path.join(__dirname, process.argv[2]); //переменная пути к исходной папке
+
+fs.readdir(exampleFolder, (err, data) =>{
     if(err){
         console.log(err);
     }
 
-    let arFiles = data.toString().split(',');
+    const arFiles = data.toString().split(','); // создаем маccив имени файлов
 
-    let folderName = [];
+    let folderNames = []; //инициализируем пустой массив в котором будут храниться имена папок которые нужно создать
 
     arFiles.map(f =>{
-        folderName.push(f[0]);
+        folderNames.push(f[0]);
+    })
+    let i = 0;
+    folderNames.forEach(folder => {
+        let upperFold = folder.toUpperCase(); //переводим имя папки в большой регистр
+        //newFolder = path.join(__dirname,'result',upperFold); // создаем путь до конечных папок
+
+        if(!fs.existsSync(path.join(__dirname,'result',upperFold))) { //проверяем наличие папки
+            fs.mkdirSync(path.join(__dirname,'result',upperFold)); // создаем папку если ее нет
+        }
+        if(arFiles[i][0] === folder){ // делаем проверку какая картинка должна оказаться в какой папке
+
+        }
+
+        i++;
     })
 
-    folderName.forEach(folder => {
-        //folder = folder.path(__dirname, 'example', folder);
-        console.log(fs.existsSync(folder));
-            if(fs.existsSync(folder.toUpperCase())) {
-                fs.mkdirSync(folder.toUpperCase());
-            }
-    })
 } );
 
 
