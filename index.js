@@ -43,7 +43,7 @@ fs.readdir(exampleFolder, (err, data) =>{
         }
         i++;
     })
-    fs.rmdir(exampleFolder, err => {
+    fs.rmdir(exampleFolder, err => { //удаление исходной папки
         if(err){
             console.log(err);
         }
