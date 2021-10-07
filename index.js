@@ -31,9 +31,10 @@ fs.readdir(exampleFolder, (err, data) =>{
         if(!fs.existsSync(newFolder)) { //проверяем наличие папки
             fs.mkdirSync(path.join(newFolder), { recursive: true }); // создаем папку если ее нет
         }
-         if(folder === arFiles[i][0]){ // делаем проверку какая картинка должна оказаться в какой папке
+
+        if(folder === arFiles[i][0]){ // делаем проверку какая картинка должна оказаться в какой папке
             (async () => {
-                await fs.rename(file, newFolder, err => {
+                await fs.rename(file, `${newFolder}/${arFiles[i]}`, err => {
                     if(err){
                         console.log(err);
                     }
@@ -42,5 +43,9 @@ fs.readdir(exampleFolder, (err, data) =>{
         }
         i++;
     })
-
-} );
+    fs.rmdir(exampleFolder, err => {
+        if(err){
+            console.log(err);
+        }
+    })    
+});
