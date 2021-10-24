@@ -4,8 +4,6 @@ const fs = require('fs').promises;
 const outputPath = process.argv[2];
 const exampleFolder = path.join(__dirname, outputPath); //переменная пути к исходной папке
 
-console.log(fs.readdir(exampleFolder));
-
 (async () => {
     try{
         const data = await fs.readdir(exampleFolder);
