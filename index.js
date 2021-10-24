@@ -8,7 +8,6 @@ const exampleFolder = path.join(__dirname, outputPath); //переменная �
     try{
         const data = await fs.readdir(exampleFolder);
 
-
         const arFiles = data.toString().split(','); // создаем маccив имени файлов
 
         let folderNames = []; //инициализируем пустой массив в котором будут храниться имена папок которые нужно создать
